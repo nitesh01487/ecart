@@ -1,0 +1,36 @@
+extends base
+    
+block content
+    .main-d
+        .main-order 
+            .main-order-head 
+                .main-order-hd-text 
+                    .main-order-head-text Orders 
+            if(orderedItems.length > 0)
+                .main-order-body
+                    .main-order-body-i
+                        each item in orderedItems
+                            .main-order-body-item 
+                                a(href=`/${item.product._id}`)
+                                    .main-order-body-item-img 
+                                        img(src=`${item.image.split('/').filter((ele, i) => {return i!=4;}).filter((ele, i) => {return i!=4;}).join('/')}` alt="default img")
+                                .main-order-body-item-body 
+                                    .main-order-body-item-body-text 
+                                        .main-order-body-item-body-text.mcbibta= (`${item.title}`)
+                                        .main-order-body-item-body-text  
+                                    .main-order-body-item-body-pricing
+                                        .main-order-body-item-body-pricing-sp= (`Rs. ${item.orderPrice * item.quantity}`)
+                                    .main-order-body-item-rest 
+                                        .main-order-body-item-size= (`SIZE: ${item.size.length == 2? item.size: `${item.size}  `}`) 
+                                        .main-order-body-item-quantity
+                                            //- .main-order-body-item-quantity-return Return
+                                            div(class="main-order-body-item-quantity-text" )= (`${item.quantity}`)
+                                            //- .main-order-body-item-quantity-exchange Exchange
+                                    .main-order-body-item-rest= (`Your item would be delivered by  `)
+                                        span= (`${new Date(Date.now() + 7*24*60*60*1000 - new Date(item.orderDate).getSeconds()).toLocaleString('en-us',{month:'short'})} ${new Date(Date.now() + 7*24*60*60*1000 - new Date(item.orderDate).getSeconds()).getDate()}`)
+                    
+            else
+                .no-order-items
+                    .no-order-items-head No products are ordered yet!
+                    .no-order-items-body Go to product add items to cart and pay 
+                        

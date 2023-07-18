@@ -1,0 +1,40 @@
+header.header
+    nav.nav.nav--tours    
+        //- a.nav__el(href='/') All tours
+        .nav_img
+            a(href="/")
+                .header__logo
+                    img(src='/img/logo_cart.png' alt='Natours logo')
+        .nav_search_box
+            form.nav__search
+                input(type='text' placeholder=' Search more than 30,000 products' class='nav__search-input')
+                button.nav__search-btn
+                    svg
+                        use(xlink:href='img/icons.svg#icon-search')
+
+    nav.nav.nav--additional-btn 
+        a(class="nav--additional-btn-cart" href="/cart")
+            svg
+                use(xlink:href='img/icons.svg#icon-cart')
+        .nav--additional-btn-more
+            .nav--additional-btn-more-a
+                a More 
+            .nav--additional-btn-more-more-option-down
+                svg
+                    use(xlink:href='img/icons.svg#icon-chevron-down')
+            //- .nav--additional-btn-more-more-option-up
+            //-     svg
+            //-         use(xlink:href='img/icons.svg#icon-chevron-up')
+        .nav--additional-btn-become__seller
+            a Become a Seller
+        
+    .header__logo
+    nav.nav.nav--user
+        if user
+            a.nav__el.nav__el--logout Log out
+            a.nav__el(href='/me')
+                img.nav__user-img(src=`/img/users/${user.photo}` alt=`Photo of ${user.name}`)
+                span= user.name.split(' ')[0]
+        else
+            a.nav__el(href='/login') Log in
+            a.nav__el.nav__el--cta(href='/signup') Sign up

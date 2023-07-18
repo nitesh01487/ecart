@@ -1,0 +1,69 @@
+extends base
+include _reviewCard
+
+block content
+    .main-product 
+        .main-product-container
+            .main-product-container-img 
+                each img in product.images
+                    .main-product-container-img-c
+                        img(src=`${img.split('/').filter((ele, i) => {return i!=4;}).filter((ele, i) => {return i!=4;}).join('/')}`, alt="")
+        .main-product-container-text 
+            .main-product-container-text-head 
+                .main-product-container-text-head-brand= (`${product.brand}`)
+                .main-product-container-text-head-title= (`${product.title}`)
+                .main-product-container-text-head-rating
+                    .main-product-container-text-head-rating-value= (`${product.average_rating}`)
+                        svg
+                            use(xlink:href='img/icons.svg#icon-star')
+            .main-product-container-text-body 
+                .main-product-container-text-body-price 
+                    .main-product-container-text-body-price-selling= (`Rs. ${product.selling_price}`)
+                    .main-product-container-text-body-price-mrp MRP 
+                    s.main-product-container-text-body-price-actulal= (`Rs. ${product.actual_price}`)
+                    .main-product-container-text-body-price-discount= (`(${product.discount})`)
+                .main-product-container-text-body-tax Exclusive of all tax
+                .main-product-container-text-body-size 
+                    .main-product-container-text-body-size-head  
+                        .main-product-container-text-body-size-head-t SELECT SIZE
+                        div(class="main-product-container-text-body-size-head-l display-hidden") Select Size
+                    .main-product-container-text-body-size-body
+                        div(class="size-scale" data-size="XS") XS
+                        div(class="size-scale" data-size="S") S
+                        div(class="size-scale" data-size="M") M
+                        div(class="size-scale" data-size="L") L
+                        div(class="size-scale" data-size="XL") XL
+                        div(class="size-scale" data-size="XXL") XXL
+                .main-product-cart-btn 
+                    .main-product-cart-btn-svg 
+                        svg 
+                            use(xlink:href='/img/icons.svg#icon-cart')
+                    .main-product-cart-btn-text Add To Cart
+                .product-description
+                    .product-description-head Product Details
+                    .product-description-Content= (`${product.description}`)
+                .product-details
+                    .product-details-head Product Specification
+                    - const specsObj = JSON.parse(product.product_details)
+                    each obj in specsObj
+                        .product-details-container 
+                            .product-details-key= (`${Object.keys(obj)}`)
+                            .product-details-value= (`${Object.values(obj)}`)
+                            
+            .product-ratings
+                .product-ratings-head Ratings
+                .product-ratings-head No Current reviews
+            .product-additional-ingo 
+                .product-additional-ingo-pid PRODUCT ID:
+                    span= (` ${product.pid}`)
+                .product-additional-ingo-seller Seller: 
+                    span= (` ${product.seller}`)
+                .product-additional-ingo-cat Category:
+                    span= (` ${product.category}`)
+                .product-additional-ingo-subCat Sub Category:
+                    span= (` ${product.sub_category}`)
+                    
+                
+
+
+        

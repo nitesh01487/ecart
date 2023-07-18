@@ -1,0 +1,242 @@
+extends base
+    
+block content
+    .main-div
+        aside.aside
+            .aside-filter-row-main
+                .aside-filter-row-filter
+                    .aside-filter-row-filter-text Filter
+                    .aside-filter-row-filter-reset Clear
+
+            .aside-filter-row
+                .aside-filter-row-head
+                    .aside-filter-row-head-text CUSTOMER RATINGS
+                    .aside-filter-row-head-down
+                        svg
+                            use(xlink:href='img/icons.svg#icon-chevron-down')
+                    .aside-filter-row-head-up.aside-display
+                        svg
+                            use(xlink:href='img/icons.svg#icon-chevron-up')
+                .aside-filter-row-body.aside-display.aside-rating
+                    .aside-filter-row-body-label
+                        label(for="inputRating4" class="inputRating") 
+                            input(type="checkbox" id="inputRating4" data-rating="4")
+                            .aside-filter-row-body-label-text 4★ & above
+                    .aside-filter-row-body-label
+                        label(for="inputRating3" class="inputRating") 
+                            input(type="checkbox" id="inputRating3" data-rating="3")
+                            .aside-filter-row-body-label-text 3★ & above
+                    .aside-filter-row-body-label
+                        label(for="inputRating2" class="inputRating") 
+                            input(type="checkbox" id="inputRating2" data-rating="2")
+                            .aside-filter-row-body-label-text 2★ & above
+                    .aside-filter-row-body-label
+                        label(for="inputRating1" class="inputRating")
+                            input(type="checkbox" id="inputRating1" data-rating="1")                            
+                            .aside-filter-row-body-label-text 1★ & above
+            
+            .aside-filter-row
+                .aside-filter-row-head
+                    .aside-filter-row-head-text PRICE
+                    .aside-filter-row-head-down
+                        svg
+                            use(xlink:href='img/icons.svg#icon-chevron-down')
+                    .aside-filter-row-head-up.aside-display
+                        svg
+                            use(xlink:href='img/icons.svg#icon-chevron-up')
+                .aside-filter-row-body.aside-display.aside-price
+                    .aside-filter-row-body-label
+                        label(for="inputPrice5" class="inputPrice") 
+                            input(type="checkbox" id="inputPrice5" data-price="2000,")
+                            .aside-filter-row-body-label-text More than Rs.2000
+                    .aside-filter-row-body-label
+                        label(for="inputPrice4" class="inputPrice") 
+                            input(type="checkbox" id="inputPrice4" data-price="1500,2000")
+                            .aside-filter-row-body-label-text Rs. 1500 to Rs. 2000
+                    .aside-filter-row-body-label
+                        label(for="inputPrice3" class="inputPrice" ) 
+                            input(type="checkbox" id="inputPrice3" data-price="1000,1500")
+                            .aside-filter-row-body-label-text Rs. 1000 to Rs. 1500
+                    .aside-filter-row-body-label
+                        label(for="inputPrice2" class="inputPrice") 
+                            input(type="checkbox" id="inputPrice2" data-price="500,1000")
+                            .aside-filter-row-body-label-text Rs. 500 to Rs. 1000
+                    .aside-filter-row-body-label
+                        label(for="inputPrice1" class="inputPrice")
+                            input(type="checkbox" id="inputPrice1" data-price="0,500")                            
+                            .aside-filter-row-body-label-text Less than Rs. 500
+
+
+            .aside-filter-row
+                .aside-filter-row-head
+                    .aside-filter-row-head-text DISCOUNT
+                    .aside-filter-row-head-down
+                        svg
+                            use(xlink:href='img/icons.svg#icon-chevron-down')
+                    .aside-filter-row-head-up.aside-display
+                        svg
+                            use(xlink:href='img/icons.svg#icon-chevron-up')
+                .aside-filter-row-body.aside-display.aside-discount
+                    .aside-filter-row-body-label
+                        label(for="inputDiscount30" class="inputDiscount") 
+                            input(type="checkbox" id="inputDiscount30" data-discount="30")
+                            .aside-filter-row-body-label-text 30% or more
+                    .aside-filter-row-body-label
+                        label(for="inputDiscount40" class="inputDiscount" ) 
+                            input(type="checkbox" id="inputDiscount40" data-discount="40")
+                            .aside-filter-row-body-label-text 40% or more
+                    .aside-filter-row-body-label
+                        label(for="inputDiscount50" class="inputDiscount") 
+                            input(type="checkbox" id="inputDiscount50" data-discount="50")
+                            .aside-filter-row-body-label-text 50% or more
+                    .aside-filter-row-body-label
+                        label(for="inputDiscount60" class="inputDiscount")
+                            input(type="checkbox" id="inputDiscount60" data-discount="60")                            
+                            .aside-filter-row-body-label-text 60% or more      
+                    .aside-filter-row-body-label
+                        label(for="inputDiscount70" class="inputDiscount")
+                            input(type="checkbox" id="inputDiscount70" data-discount="70")                            
+                            .aside-filter-row-body-label-text 70% or more      
+                
+            .aside-filter-row
+                .aside-filter-row-head
+                    .aside-filter-row-head-text BRAND
+                    .aside-filter-row-head-down
+                        svg
+                            use(xlink:href='img/icons.svg#icon-chevron-down')
+                    .aside-filter-row-head-up.aside-display
+                        svg
+                            use(xlink:href='img/icons.svg#icon-chevron-up')
+                .aside-filter-row-body.aside-display.aside-brand
+                    .aside-filter-row-body-label
+                        label(for="inputBrandREEB" class="inputBrand") 
+                            input(type="checkbox" id="inputBrandREEB" data-brand="REEB")
+                            .aside-filter-row-body-label-text REEB
+                    .aside-filter-row-body-label
+                        label(for="inputBrandECKO_Unl" class="inputBrand" ) 
+                            input(type="checkbox" id="inputBrandECKO_Unl" data-brand="ECKO Unl")
+                            .aside-filter-row-body-label-text ECKO Unl
+                    .aside-filter-row-body-label
+                        label(for="inputBrandTrue_Bl" class="inputBrand") 
+                            input(type="checkbox" id="inputBrandTrue_Bl" data-brand="True Bl")
+                            .aside-filter-row-body-label-text True Bl
+                    .aside-filter-row-body-label
+                        label(for="inputBrandAmp" class="inputBrand")
+                            input(type="checkbox" id="inputBrandAmp" data-brand="Amp")                            
+                            .aside-filter-row-body-label-text Amp
+                    .aside-filter-row-body-label
+                        label(for="inputBrandMarca_Disa" class="inputBrand")
+                            input(type="checkbox" id="inputBrandMarca_Disa" data-brand="Marca Disa")                            
+                            .aside-filter-row-body-label-text Marca Disa
+                    .aside-filter-row-body-label
+                        label(for="inputBrandTEE_BUD" class="inputBrand")
+                            input(type="checkbox" id="inputBrandTEE_BUD" data-brand="TEE BUD")                            
+                            .aside-filter-row-body-label-text TEE BUD
+                    .aside-filter-row-body-label
+                        label(for="inputBrandBlack_Beat" class="inputBrand")
+                            input(type="checkbox" id="inputBrandBlack_Beat" data-brand="Black Beat")                            
+                            .aside-filter-row-body-label-text Black Beat
+                    .aside-filter-row-body-label
+                        label(for="inputBrandyellowvib" class="inputBrand")
+                            input(type="checkbox" id="inputBrandyellowvib" data-brand="yellowvib")                            
+                            .aside-filter-row-body-label-text yellowvib
+                    .aside-filter-row-body-label
+                        label(for="inputBrandFree_Authori" class="inputBrand")
+                            input(type="checkbox" id="inputBrandFree_Authori" data-brand="Free Authori")                            
+                            .aside-filter-row-body-label-text Free Authori
+                    .aside-filter-row-body-label
+                        label(for="inputBrandOka" class="inputBrand")
+                            input(type="checkbox" id="inputBrandOka" data-brand="Oka")                            
+                            .aside-filter-row-body-label-text Oka
+                    .aside-filter-row-body-label
+                        label(for="inputBrandYork" class="inputBrand")
+                            input(type="checkbox" id="inputBrandYork" data-brand="York")                            
+                            .aside-filter-row-body-label-text York
+            .aside-filter-row
+                .aside-filter-row-head
+                    .aside-filter-row-head-text AVAILABILITY
+                    .aside-filter-row-head-down
+                        svg
+                            use(xlink:href='img/icons.svg#icon-chevron-down')
+                    .aside-filter-row-head-up.aside-display
+                        svg
+                            use(xlink:href='img/icons.svg#icon-chevron-up')
+                .aside-filter-row-body.aside-display.aside-avail
+                    .aside-filter-row-body-label
+                        label(for="inputAvail" class="inputAvail") 
+                            input(type="checkbox" id="inputAvail" data-avail="true")
+                            .aside-filter-row-body-label-text Include Out of Stock
+                         
+
+        main.main
+            .card-box
+                .card-box-head 
+                    .card-box-head-text Showing results for 
+                        if(products[0])
+                            span #{`" ${cat} "`}
+                        else 
+                            span #{` No result `}
+                    .card-box-head-sort 
+                        div(class="card-box-head-sort-row card-box-head-sort-all card-box-head-sort-row-active" data-sort="crawled_at") All
+                        div(class="card-box-head-sort-row card-box-head-sort-Price-selling_price" data-sort="selling_price") Price--Low To High
+                        div(class="card-box-head-sort-row card-box-head-sort-Price--selling_price" data-sort="-selling_price") Price--High To Low                        
+                        div(class="card-box-head-sort-row card-box-head-sort-Price-crawled_at" data-sort="crawled_at") Newest First                       
+                        div(class="card-box-head-sort-row card-box-head-sort-Price--discount" data-sort="-discount") Discount
+                .card-container
+                    if(products)
+                        each product in products 
+                            if(product.images[0])  
+                                .card
+                                    a(href=`/${product._id}`)
+                                        .card__header
+                                            .card__picture
+                                                .card__picture-overlay &nbsp;
+                                                img.card__picture-img(src=`${product.images[0].split('/').filter((ele, i) => {return i!=4;}).filter((ele, i) => {return i!=4;}).join('/')}`, alt=`${product.title}`)
+                                        .card__body
+                                            if(product.brand.length > 18)
+                                                .card-head= `${product.brand.substr(0, 18)}...`
+                                            else 
+                                                .card-head= `${product.brand}`
+                                            if(product.title.length > 45)
+                                                .card-content= `${product.title.substr(0, 45)}...`
+                                            else 
+                                                .card-content= `${product.title}`
+                                                
+                                            .card-price
+                                                if(product.selling_price)
+                                                    .card-price-selling= `Rs. ${product.selling_price}`
+                                                else if(!product.discount)
+                                                    .card-price-selling= `Rs. ${product.actual_price}`
+                                                else
+                                                    .card-price-selling= `Rs. ${Math.floor(product.actual_price - product.actual_price * parseInt(product.discount) * .01)}`
+                                                s.card-price-actual= `Rs. ${product.actual_price}`
+                                                if(product.discount)
+                                                    .card-price-discount= `(${product.discount})`
+            if(products.length == 0)
+                .no-products
+                    .no-products-title We couldn't find any matches!
+                    .no-products-text Please check the spelling or try searching something else
+
+            .card-box-footer 
+                        div(class="card-box-footer-body" data-page=`${currPage},${totalPage}`) 
+                            .card-box-footer-body-prev
+                                a prev
+                            if(totalPage - currPage > 5)
+                                div(class="card-box-footer-body-text" id="page1")
+                                    a 1
+                                div(class="card-box-footer-body-text" id="page2")
+                                    a 2
+                                div(class="card-box-footer-body-text" id="page3")
+                                    a 3
+                                div(class="card-box-footer-body-text" id="page4")
+                                    a ...
+                                //- div(class="card-box-footer-body-text" id="page5")
+                                //-     a 20
+                            else if(totalPage >= currPage)
+                                .card-box-footer-body-text-less= (`${totalPage > 0 ? currPage: 0} out of ${totalPage}`)
+                            .card-box-footer-body-next
+                                a next
+
+
+
+                            

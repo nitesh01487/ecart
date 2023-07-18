@@ -1,0 +1,59 @@
+extends base
+    
+block content
+    .main-c
+        .main-cart 
+            .main-cart-head 
+                .main-cart-hd-text 
+                    .main-cart-head-text Cart 
+                    .main-cart-head-text -------------- 
+                    .main-cart-head-text Adress 
+                    .main-cart-head-text --------------  
+                    .main-cart-head-text Payement 
+            if(items.length > 0)
+                .main-cart-body
+                    .main-cart-body-i
+                        each item in items
+                            .main-cart-body-item 
+                                a(href=`/${item.pro_id._id}`)
+                                    .main-cart-body-item-img 
+                                        img(src=`${item.pro_id.images[0].split('/').filter((ele, i) => {return i!=4;}).filter((ele, i) => {return i!=4;}).join('/')}` alt="default img")
+                                .main-cart-body-item-body 
+                                    .main-cart-body-item-body-text 
+                                        .main-cart-body-item-body-text.mcbibta= (`${item.pro_id.title}`)
+                                        .main-cart-body-item-body-text= (`${item.pro_id.brand}`)
+                                        .main-cart-body-item-body-text  
+                                    .main-cart-body-item-body-pricing
+                                        .main-cart-body-item-body-pricing-sp= (`Rs. ${item.pro_id.selling_price * item.quantity}`)
+                                        s(class="main-cart-body-item-body-pricing-ac")= (`Rs. ${item.pro_id.actual_price * item.quantity}`)
+                                        .main-cart-body-item-body-pricing-d= (`${item.pro_id.discount}`)
+                                    .main-cart-body-item-rest 
+                                        .main-cart-body-item-size= (`SIZE: ${item.size.length == 2? item.size: `${item.size}  `}`) 
+                                        .main-cart-body-item-quantity
+                                            .main-cart-body-item-quantity-minus -
+                                            div(class="main-cart-body-item-quantity-text" data-id=`${item._id}`)= (`${item.quantity}`)
+                                            .main-cart-body-item-quantity-plus +
+                        .main-place-order 
+                            div(class="main-place-order-btn" id="order-btn") Place Order 
+                            
+                    .main-cart-pay 
+                        .main-cart-pay-head PRICE DETAILS 
+                        .main-cart-pay-body 
+                            .main-cart-pay-body-p 
+                                .main-cart-pay-body-p-text= (`Price(${items.length})`)
+                                .main-cart-pay-body-p-value= (` Rs. ${items.reduce(function(acc, item){return acc + item.quantity * item.pro_id.actual_price},0)}`)
+                            .main-cart-pay-body-d
+                                .main-cart-pay-body-d-text Discount
+                                .main-cart-pay-body-d-value= (`Rs. ${items.reduce(function(acc, item){return acc + item.quantity * item.pro_id.discount_price}, 0)}`)
+                            .main-cart-pay-body-dc 
+                                .main-cart-pay-body-dc-text Delivery Charges
+                                .main-cart-pay-body-dc-value Free
+                        .main-cart-pay-totalP
+                            .main-cart-pay-totalP-text Total Price
+                            .main-cart-pay-totalP-value= (` Rs. ${items.reduce(function(acc, item){return acc + item.quantity * item.pro_id.selling_price},0)}`)
+                        .main-cart-pay-desc= (`You will save Rs. ${items.reduce(function(acc, item){return acc + item.quantity * item.pro_id.discount_price}, 0)} on this order`)
+            else
+                .no-cart-items
+                    .no-cart-items-head No products are there in the cart
+                    .no-cart-items-body Please go to the product section and add the items to cart
+                        
