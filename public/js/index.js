@@ -108,7 +108,7 @@ if(aside || sortProduct) {
         const ele = window.location.href.split('?')[1].split('&');
         ele.map((el) => {
             const tempKey = el.split('=')[0];
-            console.log(tempKey);
+            // console.log(tempKey);
             const tempValue = el.split('=')[1];
             if(tempKey === "average_rating[gte]") {
             document.getElementById(`inputRating${tempValue}`).checked = true;
@@ -139,10 +139,6 @@ if(aside || sortProduct) {
 // for category
 if(category){
     category.addEventListener('click', function(e){
-        // if(e.target.classList.contains('category--common-link') || e.target.classList.contains('category--all-link')){
-        //     const element = document.getElementsByClassName('')
-        // }
-        console.log(e);
         let element;
         if(e.target.classList.contains('category--common-link')) {
             element = e.target.closest('.category--common-link');
@@ -153,7 +149,6 @@ if(category){
             return;
 
         // for all tag in category section
-        console.log(element.classList)
         if(element.classList.contains('category--common-all')) {
             element.setAttribute("href", `/`);
             return;
@@ -208,7 +203,7 @@ if(aside) {
                 if(e.target.closest('.aside-filter-row-body-label')){
                     const ele = e.target.closest('.aside-filter-row-body-label');
                     const value = ele.querySelector('input').getAttribute('data-rating');
-                    console.log(ele, value)
+                    // console.log(ele, value)
                     let filteredUrl;
                     let undoChangeUrl;
                     if(window.location.href.split('?')[1]){
@@ -235,7 +230,7 @@ if(aside) {
                 if(e.target.closest('.aside-filter-row-body-label')){
                     const ele = e.target.closest('.aside-filter-row-body-label');
                     const value = ele.querySelector('input').getAttribute('data-price');
-                    console.log(ele, value)
+                    // console.log(ele, value)
                     let filteredUrl;
                     let undoChangeUrl;
                     if(window.location.href.split('?')[1]){
@@ -339,7 +334,6 @@ if(aside) {
 // for sort
 if(sortProduct) {
     sortProduct.addEventListener('click', function(e){
-        console.log('event occured')
 
         if(e.target.classList.contains('card-box-head-sort-row')) {
             // first disable the active class
@@ -375,7 +369,7 @@ if(pagei) {
     next = next.querySelector('a');
     const currPage = +data.split(',')[0];
     const totalPage = +data.split(',')[1];
-    console.log(currPage, totalPage);
+    // console.log(currPage, totalPage);
     let url;
     if(window.location.href.split('?')[1]){
         url = window.location.href.split('?')[1];
@@ -438,7 +432,7 @@ if(select) {
             e.target.style.border = '1px solid rgb(193, 190, 190)';
             const urlId = window.location.href.split('/');
             const id = urlId[urlId.length - 1];
-            console.log(id)
+            // console.log(id)
             value = {
                 product: {
                     pro_id: id,
@@ -471,20 +465,17 @@ if(cartBody) {
     cartBody.addEventListener('click', function(e){
         let value ;
         const item = e.target.closest('.main-cart-body-item');
-        console.log(item)
         const buttonText = item.querySelector('.main-cart-body-item-quantity-text');
-        console.log(buttonText)
         if(e.target.classList.contains('main-cart-body-item-quantity-minus')) {
             const val = +buttonText.textContent - 1;
             const searchId = buttonText.getAttribute("data-id");
-            console.log(val, searchId)
             value = {
                 product: {
                     quantity: val
                 },
                 searchId: searchId
             }
-            console.log(value)
+            
             if(val === 0) {
                 deleteCartProduct(value);
             }
@@ -495,7 +486,7 @@ if(cartBody) {
         if(e.target.classList.contains('main-cart-body-item-quantity-plus')) {
             const val = +buttonText.textContent + 1;
             const searchId = buttonText.getAttribute("data-id");
-            console.log(val, searchId)
+            // console.log(val, searchId)
             value = {
                 product: {
                     quantity: val
@@ -509,7 +500,7 @@ if(cartBody) {
 
 if(bookBtn) {
     bookBtn.addEventListener('click', e => {
-        console.log(bookBtn)
+        // console.log(bookBtn)
         e.target.textContent = 'Processing...';
         orderItem();
     })

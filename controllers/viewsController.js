@@ -59,7 +59,7 @@ exports.getCart = catchAsync(async (req, res, next) => {
                       .populate({
                         path: 'product.pro_id',
                       });
-                      console.log(cartItems)
+                      // console.log(cartItems)
   const items = cartItems.product;
         
   res.status(200).render('cart',{
@@ -72,7 +72,7 @@ exports.getOrder = catchAsync(async (req, res, next) => {
   // console.log(req.user)
   const orderedItems = await Order
                       .find({user: req.user._id});
-                      console.log(orderedItems);
+                      // console.log(orderedItems);
         
   res.status(200).render('orders',{
     title: `Order`,

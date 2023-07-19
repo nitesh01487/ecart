@@ -8760,26 +8760,23 @@ var orderItem = /*#__PURE__*/function () {
           "/api/v1/orders/checkout-session");
         case 3:
           session = _context.sent;
-          console.log(session);
-
-          // 2) Create checkout form + charge credit card
-          _context.next = 7;
+          _context.next = 6;
           return stripe.redirectToCheckout({
             sessionId: session.data.session.id
           });
-        case 7:
-          _context.next = 13;
+        case 6:
+          _context.next = 12;
           break;
-        case 9:
-          _context.prev = 9;
+        case 8:
+          _context.prev = 8;
           _context.t0 = _context["catch"](0);
           console.log(_context.t0);
           (0, _alert.showAlert)('error', _context.t0);
-        case 13:
+        case 12:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[0, 9]]);
+    }, _callee, null, [[0, 8]]);
   }));
   return function orderItem() {
     return _ref.apply(this, arguments);
@@ -28922,7 +28919,7 @@ if (aside || sortProduct) {
     var ele = window.location.href.split('?')[1].split('&');
     ele.map(function (el) {
       var tempKey = el.split('=')[0];
-      console.log(tempKey);
+      // console.log(tempKey);
       var tempValue = el.split('=')[1];
       if (tempKey === "average_rating[gte]") {
         document.getElementById("inputRating".concat(tempValue)).checked = true;
@@ -28947,10 +28944,6 @@ if (aside || sortProduct) {
 // for category
 if (category) {
   category.addEventListener('click', function (e) {
-    // if(e.target.classList.contains('category--common-link') || e.target.classList.contains('category--all-link')){
-    //     const element = document.getElementsByClassName('')
-    // }
-    console.log(e);
     var element;
     if (e.target.classList.contains('category--common-link')) {
       element = e.target.closest('.category--common-link');
@@ -28960,7 +28953,6 @@ if (category) {
     if (!element) return;
 
     // for all tag in category section
-    console.log(element.classList);
     if (element.classList.contains('category--common-all')) {
       element.setAttribute("href", "/");
       return;
@@ -29016,7 +29008,7 @@ if (aside) {
         if (e.target.closest('.aside-filter-row-body-label')) {
           var _ele2 = e.target.closest('.aside-filter-row-body-label');
           var value = _ele2.querySelector('input').getAttribute('data-rating');
-          console.log(_ele2, value);
+          // console.log(ele, value)
           var _filteredUrl;
           var undoChangeUrl;
           if (window.location.href.split('?')[1]) {
@@ -29045,7 +29037,7 @@ if (aside) {
         if (e.target.closest('.aside-filter-row-body-label')) {
           var _ele3 = e.target.closest('.aside-filter-row-body-label');
           var _value = _ele3.querySelector('input').getAttribute('data-price');
-          console.log(_ele3, _value);
+          // console.log(ele, value)
           var _filteredUrl2;
           var _undoChangeUrl;
           if (window.location.href.split('?')[1]) {
@@ -29156,7 +29148,6 @@ if (aside) {
 // for sort
 if (sortProduct) {
   sortProduct.addEventListener('click', function (e) {
-    console.log('event occured');
     if (e.target.classList.contains('card-box-head-sort-row')) {
       // first disable the active class
       var element = e.target.closest('.card-box-head-sort').querySelector('.card-box-head-sort-row-active');
@@ -29191,7 +29182,7 @@ if (pagei) {
   next = next.querySelector('a');
   var currPage = +data.split(',')[0];
   var totalPage = +data.split(',')[1];
-  console.log(currPage, totalPage);
+  // console.log(currPage, totalPage);
   var url;
   if (window.location.href.split('?')[1]) {
     url = window.location.href.split('?')[1];
@@ -29256,7 +29247,7 @@ if (select) {
       e.target.style.border = '1px solid rgb(193, 190, 190)';
       var urlId = window.location.href.split('/');
       var id = urlId[urlId.length - 1];
-      console.log(id);
+      // console.log(id)
       value = {
         product: {
           pro_id: id,
@@ -29286,20 +29277,16 @@ if (cartBody) {
   cartBody.addEventListener('click', function (e) {
     var value;
     var item = e.target.closest('.main-cart-body-item');
-    console.log(item);
     var buttonText = item.querySelector('.main-cart-body-item-quantity-text');
-    console.log(buttonText);
     if (e.target.classList.contains('main-cart-body-item-quantity-minus')) {
       var val = +buttonText.textContent - 1;
       var searchId = buttonText.getAttribute("data-id");
-      console.log(val, searchId);
       value = {
         product: {
           quantity: val
         },
         searchId: searchId
       };
-      console.log(value);
       if (val === 0) {
         (0, _addToCart.deleteCartProduct)(value);
       } else {
@@ -29310,7 +29297,7 @@ if (cartBody) {
     if (e.target.classList.contains('main-cart-body-item-quantity-plus')) {
       var _val = +buttonText.textContent + 1;
       var _searchId = buttonText.getAttribute("data-id");
-      console.log(_val, _searchId);
+      // console.log(val, searchId)
       value = {
         product: {
           quantity: _val
@@ -29324,7 +29311,7 @@ if (cartBody) {
 }
 if (bookBtn) {
   bookBtn.addEventListener('click', function (e) {
-    console.log(bookBtn);
+    // console.log(bookBtn)
     e.target.textContent = 'Processing...';
     (0, _stripe.orderItem)();
   });
