@@ -8716,13 +8716,14 @@ var signup = /*#__PURE__*/function () {
               location.assign('/login');
             }, 1500);
           }
-          _context.next = 10;
+          _context.next = 11;
           break;
         case 7:
           _context.prev = 7;
           _context.t0 = _context["catch"](0);
+          (0, _alert.showAlert)('something went wrong', 500);
           console.log(_context.t0);
-        case 10:
+        case 11:
         case "end":
           return _context.stop();
       }
@@ -29341,7 +29342,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53015" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59450" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
