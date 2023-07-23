@@ -113,7 +113,8 @@
     -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
     z-index: 9999;
-    color: #ffffff;
+    color: #000000;
+    background-color: #8f8d8d;
     font-size: 1.8rem;
     font-weight: 400;
     text-align: center;
@@ -2570,6 +2571,14 @@ padding-left: 3rem;
       grid-gap: 2rem;
       grid-auto-flow: row;
       width: 92vw;
+    }
+  }
+  @media only screen and (max-width: 700px){
+    .user-view{
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+      flex-direction: column;
     }
   }
   @media only screen and (max-width: 470px){

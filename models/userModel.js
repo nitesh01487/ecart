@@ -74,7 +74,7 @@ userSchema.pre('save', async function(next) {
     // Hash the password with cost of 12
     // Encrypt or hash the password
     // we use bcrypt which uses salting
-    this.password = await bcrypt.hash(this.password, 12); //12 is cost of hashing
+    this.password = await bcrypt.hash(this.password, 10); //12 is cost of hashing
 
     // Delete passwordConfirm field
     this.passwordConfirm = undefined;

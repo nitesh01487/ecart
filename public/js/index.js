@@ -35,9 +35,13 @@ if(leaflet) {
 if(loginForm) {
     loginForm.addEventListener('submit', e => {
         e.preventDefault();
+
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
         login(email, password);
+        
+        document.getElementById('email').value = '';
+        document.getElementById('password').value = '';
     })
 }
 
@@ -49,6 +53,10 @@ if(signinForm) {
         const password = document.getElementById('password').value;
         const passwordConfirm = document.getElementById('passwordConfirm').value;
         signup(name, email, password, passwordConfirm,);
+        document.getElementById('name').value = '';
+        document.getElementById('email').value = '';
+        document.getElementById('password').value = '';
+        document.getElementById('passwordConfirm').value = '';
     })
 }
 

@@ -8511,33 +8511,34 @@ var updateSettings = /*#__PURE__*/function () {
       while (1) switch (_context.prev = _context.next) {
         case 0:
           _context.prev = 0;
+          (0, _alert.showAlert)('Wait', "Your request have been queued");
           url = type === 'password'
           // ? 'http://127.0.1:3000/api/v1/users/updateMyPassword'
           // : 'http://127.0.1:3000/api/v1/users/updateMe';
           ? '/api/v1/users/updateMyPassword' : '/api/v1/users/updateMe';
-          _context.next = 4;
+          _context.next = 5;
           return (0, _axios.default)({
             method: 'PATCH',
             url: url,
             data: data
           });
-        case 4:
+        case 5:
           res = _context.sent;
           if (res.data.status === 'success') {
             (0, _alert.showAlert)('success', "".concat(type.toUpperCase(), " updated successfully!"));
             location.reload('/me');
           }
-          _context.next = 11;
+          _context.next = 12;
           break;
-        case 8:
-          _context.prev = 8;
+        case 9:
+          _context.prev = 9;
           _context.t0 = _context["catch"](0);
           (0, _alert.showAlert)('error', _context.t0.response.data.message);
-        case 11:
+        case 12:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[0, 8]]);
+    }, _callee, null, [[0, 9]]);
   }));
   return function updateSettings(_x, _x2) {
     return _ref.apply(this, arguments);
@@ -8697,7 +8698,8 @@ var signup = /*#__PURE__*/function () {
       while (1) switch (_context.prev = _context.next) {
         case 0:
           _context.prev = 0;
-          _context.next = 3;
+          (0, _alert.showAlert)('Wait!', 'Your request is being processed ...');
+          _context.next = 4;
           return (0, _axios.default)({
             method: 'POST',
             url: '/api/v1/users/signup',
@@ -8708,7 +8710,7 @@ var signup = /*#__PURE__*/function () {
               passwordConfirm: passwordConfirm
             }
           });
-        case 3:
+        case 4:
           res = _context.sent;
           if (res.data.status === 'success') {
             (0, _alert.showAlert)('success', 'You are sign in successfully!');
@@ -8716,18 +8718,18 @@ var signup = /*#__PURE__*/function () {
               location.assign('/login');
             }, 1500);
           }
-          _context.next = 11;
+          _context.next = 12;
           break;
-        case 7:
-          _context.prev = 7;
+        case 8:
+          _context.prev = 8;
           _context.t0 = _context["catch"](0);
           (0, _alert.showAlert)('something went wrong', 500);
           console.log(_context.t0);
-        case 11:
+        case 12:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[0, 7]]);
+    }, _callee, null, [[0, 8]]);
   }));
   return function signup(_x, _x2, _x3, _x4) {
     return _ref.apply(this, arguments);
@@ -28842,6 +28844,8 @@ if (loginForm) {
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
     (0, _login.login)(email, password);
+    document.getElementById('email').value = '';
+    document.getElementById('password').value = '';
   });
 }
 if (signinForm) {
@@ -28852,6 +28856,10 @@ if (signinForm) {
     var password = document.getElementById('password').value;
     var passwordConfirm = document.getElementById('passwordConfirm').value;
     (0, _signup.signup)(name, email, password, passwordConfirm);
+    document.getElementById('name').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('password').value = '';
+    document.getElementById('passwordConfirm').value = '';
   });
 }
 if (logoutBtn) {

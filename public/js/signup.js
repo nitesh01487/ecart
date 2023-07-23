@@ -4,6 +4,7 @@ import { showAlert, hideAlert } from './alert';
 
 export const signup = async(name, email, password, passwordConfirm) => {
     try{
+        showAlert('Wait!', 'Your request is being processed ...');
         const res = await axios({
             method: 'POST',
             url: '/api/v1/users/signup',
