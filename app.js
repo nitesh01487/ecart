@@ -10,6 +10,7 @@ const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
 // parse the cookie coming from the server
 const compression = require('compression');
+const cors = require('cors');
 
 
 const AppError = require('./utils/appError');
@@ -33,15 +34,16 @@ app.set('views', path.join(__dirname, 'views'));
 
 // 1 GLOBAL MIDDLEwARES /////////////////////////////
 // Implement CORS
-// app.use(cors());
+app.use(cors());
 // Access-Control-Allow-Origin *
 // api.natours.com, front-end natours.com
 // app.use(cors({
 //   origin: 'https://www.natours.com'
 // }))
 
-// app.options('*', cors());
-// app.options('/api/v1/tours/:id', cors());
+// http upon which can respond to
+app.options('*', cors());
+// app.options('/api/v1/tours/:id', cors()); // only complex request like post patch and delete of tours
 
 // Serving static files
 // app.use(express.static(`${__dirname}/public`));
