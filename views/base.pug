@@ -14,7 +14,7 @@ html
             //- every img and favicon or, for css property it get its own get request
             //- why does the css and img get loaded 
             //- because of path.join middleware in app
-    body
+    body(data-alert=`${alert ? alert: ''}`)
         //- ////////////////////////////////////////////////////
         //- ////////////////     PRACTISE      /////////////////
         //- ////////////////////////////////////////////////////
@@ -49,10 +49,5 @@ html
         // FOOTER
         include _footer
 
-
-        
-        //- script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js')
-        //- script(src='/js/mapBox.js')
-        //- script(src='/js/login.js')
         script(src='https://js.stripe.com/v3/')
         script(src='/js/bundle.js')

@@ -6,6 +6,8 @@ const Product = require('../models/productModel');
 
 const router = express.Router();
 
+router.use(viewsController.alerts);
+
 router.get('/AboutUs', viewsController.getAboutUs);
 router.get('/ContactUs', viewsController.getContact);
 router.get('/cart', authController.protect,  viewsController.getCart);
@@ -16,7 +18,7 @@ router.get('/me', authController.protect, viewsController.getAccount);
   
 router.get(
     '/',  
-    orderController.createOrderCheckout,
+    // orderController.createOrderCheckout,
     authController.isLoggedIn,  
     viewsController.getOverview(Product)
 );

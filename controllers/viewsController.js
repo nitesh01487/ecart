@@ -7,6 +7,14 @@ const { model } = require('mongoose');
 const Order = require('../models/orderModel');
 const ObjectId = require('mongodb').ObjectId;
 
+exports.alerts = (req, res, next) => {
+  const {alert} = req.query;
+  if(alert === 'order')
+    res.locals.alert = `Your booking was succesful!`;
+    // res.locals.alert = `Your booking was succesful! Please check your email for a confirmation. If your booking doesn't show up here immediately, Please come back later.`;
+  next();
+}
+
 exports.getOverview = (Model, queryObj) => catchAsync(async (req, res, next) => {
     // 0) Query
     const cat = req.query.sub_category ? `${req.query.sub_category}`: 'All Products';

@@ -72,11 +72,11 @@ const limiter= rateLimit({
 app.use('/api',limiter); // apply to all api routes
 
 // Stripe webhook, BEFORE body-parser, because stripe needs the body as stream
-// app.post(
-//   '/webhook-checkout',
-//   bodyParser.raw({ type: 'application/json' }),
-//   bookingController.webhookCheckout
-// );
+app.post(
+  '/webhook-checkout',
+  express.raw({ type: 'application/json' }),
+  orderController.webhookCheckout
+);
 
 // express.json() is middle ware because it will stay b/w the req and res
 

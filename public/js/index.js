@@ -1,15 +1,12 @@
 import '@babel/polyfill';
 import { login, logout } from './login';
-import { displayMap } from './leaflet';
 import { updateSettings } from './updateSettings';
 import { signup } from './signup';
 import { orderItem } from './stripe';
-import { doc } from 'prettier';
 import { updateCartDetails, updateCartQuantity, deleteCartProduct } from './addToCart';
 import { showAlert } from './alert';
 // DOM ELEMENTS
-const leaflet = document.getElementById('map');
-// console.log(leaflet)
+
 const loginForm = document.querySelector('.form--login');
 const logoutBtn = document.querySelector('.nav__el--logout');
 const signinForm = document.querySelector('.form--signup');
@@ -27,10 +24,6 @@ const cartButtonP = document.querySelector('.main-product-cart-btn');
 const cartBody = document.querySelector('.main-cart-body-i');
 
 // DELEGATION
-if(leaflet) {
-    const locations = JSON.parse(document.getElementById('map').dataset.locations);
-    displayMap(locations);
-}
 
 if(loginForm) {
     loginForm.addEventListener('submit', e => {
@@ -513,3 +506,6 @@ if(bookBtn) {
         orderItem();
     })
 }
+
+const alertMessage = document.querySelector('body').dataset.alert;
+if(alertMessage) showAlert('success', alertMessage);
