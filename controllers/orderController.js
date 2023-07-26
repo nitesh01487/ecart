@@ -119,7 +119,7 @@ const createOrderCheckout = async session => {
             quantity: el.quantity,
             size: el.size
         });
-    }))
+    }));
 
     // Delete all the elements from the user product
     const body = await User.findById({_id: orderId});
