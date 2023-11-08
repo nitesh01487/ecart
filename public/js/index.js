@@ -239,10 +239,14 @@ if(aside) {
                         const currUrl = window.location.href.split('?')[1].split('&');
                         filteredUrl = currUrl.filter((el) => el.split('=')[0] !== 'selling_price[gte]');
                         filteredUrl = filteredUrl.filter((el) => el.split('=')[0] !== 'selling_price[lt]').join('&');
-                        currUrl.map((el) => {
-                            if(el.split('=')[1] === value.split(',')[0] || el.split('=')[1] === value.split(',')[1]) {
+                        let checkPrev = false;
+                        currUrl.map((el) => { // if both matches
+                            if(el.split('=')[1] === value.split(',')[0]) {
+                                check = true;
+                            }
+                        }).map((el)  => {
+                            if(el.split('=')[1] === value.split(',')[1]) {
                                 undoChangeUrl = `${filteredUrl? `/?${filteredUrl}`:'/'}`;
-                                return;
                             }
                         })
 
