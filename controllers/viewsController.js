@@ -28,6 +28,7 @@ exports.getOverview = (Model, queryObj) => catchAsync(async (req, res, next) => 
                         .sort()
                         .paginate();
       // 1) Get product data from the collection
+    console.log('Hello overview');
       const products = await features.query;
 
     // for page length
@@ -92,6 +93,12 @@ exports.getOrder = catchAsync(async (req, res, next) => {
 exports.getLoginForm = (req, res) => {
   res.status(200).render('login', {
     title: ` Log into your account`
+  });
+}
+
+exports.getSigninFormSeller = (req, res) => {
+  res.status(200).render('signupSeller', {
+    title: `Sign in form for seller`
   });
 }
 

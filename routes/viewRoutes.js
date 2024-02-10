@@ -14,6 +14,7 @@ router.get('/cart', authController.protect,  viewsController.getCart);
 router.get('/order', authController.protect,  viewsController.getOrder);
 router.get('/login', authController.isLoggedIn,  viewsController.getLoginForm);
 router.get('/signup',  viewsController.getSigninForm);
+router.get('/signformseller',  viewsController.getSigninFormSeller);
 router.get('/me', authController.protect, viewsController.getAccount);
   
 router.get(
