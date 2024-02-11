@@ -5,6 +5,7 @@ const Order = require('../models/orderModel');
 const User = require('./../models/userModel')
 const catchAsync = require('../utils/catchAsync');
 const factory = require('./handlerFactory');
+const { buffer } = require('stream/consumers');
 
 
 exports.getCheckoutSession = catchAsync(async (req, res, next) => {
@@ -131,29 +132,35 @@ const createOrderCheckout = async session => {
     // res.redirect(req.originalUrl.split('?')[0])
 }
 
-exports.webhookCheckout = (req, res, next) => {
-    const signature = req.headers['stripe-signature'];
-    console.log(signature, req.body);
-    let event;
-    try{
-        event = stripe.webhooks.constructEvent(req.body, signature, process.env.STRIPE_WEBHOOK_SECRET);
-    } catch(err) {
-        return res.status.send(`Webhook error: ${err.message}`);
-    }
+exports.webhookCheckout = async (req, res, next) => {
+    if (req.method === "POST") {
+        const signature = req.headers['stripe-signature'];
+        console.log(signature, req.body);
+        const buf = await buffer(req.body);
+        let event;
+        try{
+            event = stripe.webhooks.constructEvent(buf.toString(), signature, process.env.STRIPE_WEBHOOK_SECRET);
+        } catch(err) {
+            return res.status.send(`Webhook error: ${err.message}`);
+        }
 
-    // Handle the event
-    switch (event.type) {
-        case 'checkout.session.completed':
-        const checkoutSessionCompleted = event.data.object;
-            // Then define and call a function to handle the event checkout.session.completed
-            // createOrderCheckout(event.data.object);
-        break;
-            // ... handle other event types
-        default:
-        console.log(`Unhandled event type ${event.type}`);
-    }
+        // Handle the event
+        switch (event.type) {
+            case 'checkout.session.completed':
+            const checkoutSessionCompleted = event.data.object;
+                // Then define and call a function to handle the event checkout.session.completed
+                // createOrderCheckout(event.data.object);
+            break;
+                // ... handle other event types
+            default:
+            console.log(`Unhandled event type ${event.type}`);
+        }
 
-    res.status(200).json({received: true});
+        res.status(200).json({received: true});
+    } else {
+        res.setHeader("Allow", "POST");
+        res.status(405).end("Method Not Allowed");
+    }
 }
 
 exports.createOrder = factory.createOne(Order);
