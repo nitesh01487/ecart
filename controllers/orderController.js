@@ -101,31 +101,31 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
 const createOrderCheckout = async session => {
      // This only temporary, because it is UNSECURE: because everyone can make bookings without paying
      console.log(session);
-    // const {orderId} = req.query; 
+    const {orderId} = session.client; 
 
     // if(!orderId) return next(); // for normal user
-    const user = await User
-                        .findOne({email: session.customer_email})
-                        .populate({
-                        path: 'product.pro_id',
-                        });
-    // console.log(user)
-    await Promise.all(user.product.map((el) => {
-        return Order.create({
-            product: el.pro_id,
-            user: orderId,
-            title: el.pro_id.title,
-            orderPrice: el.pro_id.selling_price,
-            image: el.pro_id.images[0],
-            quantity: el.quantity,
-            size: el.size
-        });
-    }));
+    // const user = await User
+    //                     .findOne({email: session.customer_email})
+    //                     .populate({
+    //                     path: 'product.pro_id',
+    //                     });
+    // // console.log(user)
+    // await Promise.all(user.product.map((el) => {
+    //     return Order.create({
+    //         product: el.pro_id,
+    //         user: orderId,
+    //         title: el.pro_id.title,
+    //         orderPrice: el.pro_id.selling_price,
+    //         image: el.pro_id.images[0],
+    //         quantity: el.quantity,
+    //         size: el.size
+    //     });
+    // }));
 
-    // Delete all the elements from the user product
-    const body = await User.findById({_id: orderId});
-    delete body.product;
-    const updatedUser = await User.findOneAndUpdate({"_id": orderId}, {$unset: {"product": ""}});
+    // // Delete all the elements from the user product
+    // const body = await User.findById({_id: orderId});
+    // delete body.product;
+    // const updatedUser = await User.findOneAndUpdate({"_id": orderId}, {$unset: {"product": ""}});
     
     // res.redirect(req.originalUrl.split('?')[0])
 }
