@@ -133,7 +133,7 @@ const createOrderCheckout = async session => {
 
 exports.webhookCheckout = async (req, res, next) => {
     const signature = req.headers['stripe-signature'];
-    console.log(signature, req.body);
+    // console.log(signature, req.body);
     let event;
     try{
         event = stripe.webhooks.constructEvent(req.body, signature, process.env.STRIPE_WEBHOOK_SECRET);
@@ -152,6 +152,9 @@ exports.webhookCheckout = async (req, res, next) => {
             // For example, you might update your database with the payment status
             // console.log(paymentIntentData);
             console.log(session)
+            console.log(session.line_items)
+            console.log(session.line_items.data)
+            console.log(session.line_items.data[0])
 
             // Then define and call a function to handle the event checkout.session.completed
             // createOrderCheckout(event.data.object);
