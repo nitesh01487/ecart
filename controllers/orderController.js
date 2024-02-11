@@ -100,9 +100,10 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
 
 const createOrderCheckout = async session => {
      // This only temporary, because it is UNSECURE: because everyone can make bookings without paying
-    const {orderId} = req.query; 
+     console.log(session);
+    // const {orderId} = req.query; 
 
-    if(!orderId) return next(); // for normal user
+    // if(!orderId) return next(); // for normal user
     const user = await User
                         .findOne({email: session.customer_email})
                         .populate({
