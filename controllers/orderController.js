@@ -18,8 +18,8 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     const product = cartItems[0].product;
     let item = {};
     let arrayItem = [];
-    const metadata = {};
-    let i = 1;
+    let metadata = [];
+    let i = 0;
     product.map((pro) => {
         item.quantity = pro.quantity;
         item.price_data = {
@@ -30,10 +30,11 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
                 images: [pro.pro_id.images[0]]
             }
         }
-        metadata.push({
+        metadata[i] = {
             product : pro.pro_id.id,
             productPrice : pro.pro_id.selling_price
-        });
+        };
+        i++;
         arrayItem.push(item);
         item = {};
     })
@@ -49,7 +50,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
         customer_email: req.user.email,
         mode: "payment",
         line_items: [...arrayItem],
-        metadata: metadata
+        metadata: {...metadata}
     })
 
 //     stripe.checkout.sessions.listLineItems(
