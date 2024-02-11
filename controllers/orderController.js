@@ -19,7 +19,6 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     let item = {};
     let arrayItem = [];
     const metadata = {};
-    let prop;
     let i = 1;
     product.map((pro) => {
         item.quantity = pro.quantity;
@@ -31,9 +30,10 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
                 images: [pro.pro_id.images[0]]
             }
         }
-        prop = `order_id${i}`;
-        i++;
-        metadata.prop = pro.pro_id.id;
+        metadata.push({
+            product : pro.pro_id.id,
+            productPrice : pro.pro_id.selling_price
+        });
         arrayItem.push(item);
         item = {};
     })
