@@ -101,7 +101,8 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
 const createOrderCheckout = async session => {
      // This only temporary, because it is UNSECURE: because everyone can make bookings without paying
      console.log(session);
-    const {orderId} = session.client; 
+    const {orderId} = session.client_reference_id; 
+    console.log(orderId)
 
     // if(!orderId) return next(); // for normal user
     // const user = await User
