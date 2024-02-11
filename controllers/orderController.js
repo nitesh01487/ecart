@@ -145,7 +145,7 @@ exports.webhookCheckout = async (req, res, next) => {
     switch (event.type) {
         case 'checkout.session.completed':
             const checkoutSessionCompleted = event.data.object;
-            const paymentIntentData = await stripe.paymentIntents.retrieve(event.data.payment_intent);
+            const paymentIntentData = await stripe.paymentIntents.retrieve(event.data.object.id);
             // Process payment intent data as needed
             // For example, you might update your database with the payment status
             console.log(paymentIntentData);
