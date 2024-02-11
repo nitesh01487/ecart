@@ -21,7 +21,6 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     const metadata = {};
     let prop;
     let i = 1;
-    console.log(product[0].pro_id)
     product.map((pro) => {
         item.quantity = pro.quantity;
         item.price_data = {
@@ -52,7 +51,6 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
         line_items: [...arrayItem],
         metadata: metadata
     })
-    console.log(session)
 
 //     stripe.checkout.sessions.listLineItems(
 //   'cs_test_a1RppVg40WcJtv5Br57khqHnNIV4UTkzgRzytXP2XJzYPxL4OzoI3XNZul',
@@ -133,9 +131,10 @@ const createOrderCheckout = async session => {
 
 exports.webhookCheckout = (req, res, next) => {
     const signature = req.headers['stripe-signature'];
+    console.log(signature, req.body);
     let event;
     try{
-        event = stripe.webhooks.constructEvent(req.body, signature, )
+        event = stripe.webhooks.constructEvent(req.body, signature, process.env.STRIPE_WEBHOOK_SECRET);
     } catch(err) {
         return res.status.send(`Webhook error: ${err.message}`);
     }
