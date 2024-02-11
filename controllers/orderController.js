@@ -5,7 +5,6 @@ const Order = require('../models/orderModel');
 const User = require('./../models/userModel')
 const catchAsync = require('../utils/catchAsync');
 const factory = require('./handlerFactory');
-const { buffer } = require('stream/consumers');
 
 
 exports.getCheckoutSession = catchAsync(async (req, res, next) => {
@@ -133,34 +132,33 @@ const createOrderCheckout = async session => {
 }
 
 exports.webhookCheckout = async (req, res, next) => {
-    if (req.method === "POST") {
-        const signature = req.headers['stripe-signature'];
-        console.log(signature, req.body);
-        const buf = await buffer(req.body);
-        let event;
-        try{
-            event = stripe.webhooks.constructEvent(buf.toString(), signature, process.env.STRIPE_WEBHOOK_SECRET);
-        } catch(err) {
-            return res.status.send(`Webhook error: ${err.message}`);
-        }
-
-        // Handle the event
-        switch (event.type) {
-            case 'checkout.session.completed':
-            const checkoutSessionCompleted = event.data.object;
-                // Then define and call a function to handle the event checkout.session.completed
-                // createOrderCheckout(event.data.object);
-            break;
-                // ... handle other event types
-            default:
-            console.log(`Unhandled event type ${event.type}`);
-        }
-
-        res.status(200).json({received: true});
-    } else {
-        res.setHeader("Allow", "POST");
-        res.status(405).end("Method Not Allowed");
+    const signature = req.headers['stripe-signature'];
+    console.log(signature, req.body);
+    let event;
+    try{
+        event = stripe.webhooks.constructEvent(req.body, signature, process.env.STRIPE_WEBHOOK_SECRET);
+    } catch(err) {
+        return res.status.send(`Webhook error: ${err.message}`);
     }
+
+    // Handle the event
+    switch (event.type) {
+        case 'checkout.session.completed':
+            const checkoutSessionCompleted = event.data.object;
+            const paymentIntentData = await stripe.paymentIntents.retrieve(event.data.payment_intent);
+            // Process payment intent data as needed
+            // For example, you might update your database with the payment status
+            console.log(paymentIntentData);
+
+            // Then define and call a function to handle the event checkout.session.completed
+            // createOrderCheckout(event.data.object);
+        break;
+            // ... handle other event types
+        default:
+        console.log(`Unhandled event type ${event.type}`);
+    }
+
+    res.status(200).json({received: true});
 }
 
 exports.createOrder = factory.createOne(Order);
