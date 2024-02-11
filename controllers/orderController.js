@@ -18,8 +18,9 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     const product = cartItems[0].product;
     let item = {};
     let arrayItem = [];
-    let metadata = [];
-    let i = 0;
+    const metadata = {};
+    let prop;
+    let i = 1;
     product.map((pro) => {
         item.quantity = pro.quantity;
         item.price_data = {
@@ -30,11 +31,9 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
                 images: [pro.pro_id.images[0]]
             }
         }
-        metadata[i] = {
-            product : pro.pro_id.id,
-            productPrice : pro.pro_id.selling_price
-        };
+        prop = `order_id${i}`;
         i++;
+        metadata.prop = pro.pro_id.id;
         arrayItem.push(item);
         item = {};
     })
@@ -50,7 +49,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
         customer_email: req.user.email,
         mode: "payment",
         line_items: [...arrayItem],
-        metadata: {...metadata}
+        metadata: metadata
     })
 
 //     stripe.checkout.sessions.listLineItems(
@@ -147,7 +146,7 @@ exports.webhookCheckout = (req, res, next) => {
         case 'checkout.session.completed':
         const checkoutSessionCompleted = event.data.object;
             // Then define and call a function to handle the event checkout.session.completed
-            createOrderCheckout(event.data.object);
+            // createOrderCheckout(event.data.object);
         break;
             // ... handle other event types
         default:
