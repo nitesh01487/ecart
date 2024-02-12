@@ -114,7 +114,7 @@ const createOrderCheckout = async session => {
         i++;
         return Order.create({
             product: session.metadata[`id${i}`],
-            user: user._id,
+            user: ObjectId.fromString(user._id),
             title: el.pro_id.title,
             orderPrice: session.line_items.data[i - 1].amount_subtotal / 100,
             image: el.pro_id.images[0],
@@ -124,9 +124,9 @@ const createOrderCheckout = async session => {
     }));
 
     // Delete all the elements from the user product
-    const body = await User.findById({_id: user._id});
+    const body = await User.findById({_id: ObjectId.fromString(user._id)});
     delete body.product;
-    const updatedUser = await User.findOneAndUpdate({"_id": orderId}, {$unset: {"product": ""}});
+    const updatedUser = await User.findOneAndUpdate({"_id": ObjectId.fromString(user._id)}, {$unset: {"product": ""}});
     
     res.redirect(req.originalUrl.split('?')[0])
 }
