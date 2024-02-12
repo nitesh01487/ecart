@@ -5,6 +5,7 @@ const Order = require('../models/orderModel');
 const User = require('./../models/userModel')
 const catchAsync = require('../utils/catchAsync');
 const factory = require('./handlerFactory');
+const ObjectId = require('mongodb').ObjectId;
 
 
 exports.getCheckoutSession = catchAsync(async (req, res, next) => {
@@ -114,7 +115,7 @@ const createOrderCheckout = async session => {
         i++;
         return Order.create({
             product: session.metadata[`id${i}`],
-            user: ObjectId.fromString(user._id),
+            user: new ObjectId.fromString(user._id),
             title: el.pro_id.title,
             orderPrice: session.line_items.data[i - 1].amount_subtotal / 100,
             image: el.pro_id.images[0],
@@ -124,7 +125,7 @@ const createOrderCheckout = async session => {
     }));
 
     // Delete all the elements from the user product
-    const body = await User.findById({_id: ObjectId.fromString(user._id)});
+    const body = await User.findById({_id: new ObjectId.fromString(user._id)});
     delete body.product;
     const updatedUser = await User.findOneAndUpdate({"_id": ObjectId.fromString(user._id)}, {$unset: {"product": ""}});
     
