@@ -33,7 +33,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
         }
         prop = `order_id${i}`;
         i++;
-        metadata.prop = pro.pro_id.id;
+        metadata[`id${i}`] = pro.pro_id.id;
         arrayItem.push(item);
         item = {};
     })
