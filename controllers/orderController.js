@@ -32,8 +32,8 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
             }
         }
         prop = `order_id${i}`;
-        i++;
         metadata[`id${i}`] = pro.pro_id.id;
+        i++;
         arrayItem.push(item);
         item = {};
     })
@@ -100,35 +100,35 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
 
 const createOrderCheckout = async session => {
      // This only temporary, because it is UNSECURE: because everyone can make bookings without paying
-     console.log(session);
-    const {orderId} = session.client_reference_id; 
-    console.log(orderId)
+    const orderId = session.id; 
 
-    // if(!orderId) return next(); // for normal user
-    // const user = await User
-    //                     .findOne({email: session.customer_email})
-    //                     .populate({
-    //                     path: 'product.pro_id',
-    //                     });
-    // // console.log(user)
-    // await Promise.all(user.product.map((el) => {
-    //     return Order.create({
-    //         product: el.pro_id,
-    //         user: orderId,
-    //         title: el.pro_id.title,
-    //         orderPrice: el.pro_id.selling_price,
-    //         image: el.pro_id.images[0],
-    //         quantity: el.quantity,
-    //         size: el.size
-    //     });
-    // }));
+    if(!orderId) return next(); // for normal user
+    const user = await User
+                        .findOne({email: session.customer_details.email})
+                        .populate({
+                        path: 'product.pro_id',
+                        });
+    // console.log(user)
+    let i = 0;
+    await Promise.all(user.product.map((el) => {
+        i++;
+        return Order.create({
+            product: session.metadata[i],
+            user: user._id,
+            title: el.pro_id.title,
+            orderPrice: session.line_items.data[i - 1].amount_subtotal / 100,
+            image: el.pro_id.images[0],
+            quantity: el.quantity,
+            size: el.size
+        });
+    }));
 
-    // // Delete all the elements from the user product
-    // const body = await User.findById({_id: orderId});
-    // delete body.product;
-    // const updatedUser = await User.findOneAndUpdate({"_id": orderId}, {$unset: {"product": ""}});
+    // Delete all the elements from the user product
+    const body = await User.findById({_id: user._id});
+    delete body.product;
+    const updatedUser = await User.findOneAndUpdate({"_id": orderId}, {$unset: {"product": ""}});
     
-    // res.redirect(req.originalUrl.split('?')[0])
+    res.redirect(req.originalUrl.split('?')[0])
 }
 
 exports.webhookCheckout = async (req, res, next) => {
@@ -148,16 +148,10 @@ exports.webhookCheckout = async (req, res, next) => {
             const session = await stripe.checkout.sessions.retrieve(
                 `${event.data.object.id}`, {
                 expand: ['line_items']
-              });            // Process payment intent data as needed
-            // For example, you might update your database with the payment status
-            // console.log(paymentIntentData);
-            console.log(session)
-            console.log(session.line_items)
-            console.log(session.line_items.data)
-            console.log(session.line_items.data[0])
+              });
 
             // Then define and call a function to handle the event checkout.session.completed
-            // createOrderCheckout(event.data.object);
+            createOrderCheckout(session);
         break;
             // ... handle other event types
         default:
