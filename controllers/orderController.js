@@ -127,7 +127,7 @@ const createOrderCheckout = async session => {
     // Delete all the elements from the user product
     const body = await User.findById({_id: new ObjectId(user._id)});
     delete body.product;
-    const updatedUser = await User.findOneAndUpdate({"_id": ObjectId.fromString(user._id)}, {$unset: {"product": ""}});
+    const updatedUser = await User.findOneAndUpdate({"_id": new ObjectId(user._id)}, {$unset: {"product": ""}});
     
     res.redirect(req.originalUrl.split('?')[0])
 }
