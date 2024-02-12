@@ -45,7 +45,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     const id = req.user._id;
     const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
-        success_url: `${req.protocol}://${req.get('host')}/?alert=order`,
+        success_url: `${req.protocol}://${req.get('host')}/order`,
         cancel_url: `${req.protocol}://${req.get('host')}?canceled=true`,
         customer_email: req.user.email,
         mode: "payment",
@@ -129,7 +129,7 @@ const createOrderCheckout = async session => {
     delete body.product;
     const updatedUser = await User.findOneAndUpdate({"_id": new ObjectId(user._id)}, {$unset: {"product": ""}});
     
-    res.redirect(req.originalUrl.split('?')[0])
+    // res.redirect(req.originalUrl.split('?')[0])
 }
 
 exports.webhookCheckout = async (req, res, next) => {
