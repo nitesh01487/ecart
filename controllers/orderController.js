@@ -113,7 +113,7 @@ const createOrderCheckout = async session => {
     await Promise.all(user.product.map((el) => {
         i++;
         return Order.create({
-            product: session.metadata[i],
+            product: session.metadata[`id${i}`],
             user: user._id,
             title: el.pro_id.title,
             orderPrice: session.line_items.data[i - 1].amount_subtotal / 100,
