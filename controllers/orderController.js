@@ -18,7 +18,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     const product = cartItems[0].product;
     let item = {};
     let arrayItem = [];
-    const metadata = {};
+    let metadata = {};
     let prop;
     let i = 1;
     product.map((pro) => {
